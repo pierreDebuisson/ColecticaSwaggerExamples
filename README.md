@@ -25,7 +25,8 @@ java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/s
 java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/swagger.json -l csharp -o c:\YourTargetCSharpFolder
 ```
 
-if the generation failed, just use the jar file of the repository in /Tools directory and run : 
+if the generation failed, just use the jar file of the repository in
+[this directory](https://github.com/pierreDebuisson/ColecticaSwaggerExamples/blob/master/Tools/swagger-codegen-cli-2.2.3.jar) and run : 
 ```bash
 java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/swagger.json -l java -o c:\YourTargetJavaFolder;
 java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/swagger.json -l csharp -o c:\YourTargetCSharpFolder
