@@ -16,9 +16,12 @@ colectica.portal.exe
 ```
 
 ### Generate the source code of the client library
-
+#### Clone the Swagger-codegen source code
 ```bash
 git clone https://github.com/swagger-api/swagger-codegen;
+```
+#### Download from maven [here](https://mvnrepository.com/artifact/io.swagger/swagger-codegen-cli)
+```bash
 cd swagger-codegen;
 mvn clean package;
 java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/swagger.json -l java -o c:\YourTargetJavaFolder;
