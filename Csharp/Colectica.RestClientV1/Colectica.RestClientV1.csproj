@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Colectica Repository REST API
+
+Colectica Repository REST API
+
+OpenAPI spec version: v1
+
+-->
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0578089A-9E4B-45E5-AD11-5EEDE2881395}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Colectica.RestClientV1</RootNamespace>
+    <AssemblyName>Colectica.RestClientV1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\AgencyApi.cs" />
+    <Compile Include="Api\CommentApi.cs" />
+    <Compile Include="Api\EventApi.cs" />
+    <Compile Include="Api\ItemApi.cs" />
+    <Compile Include="Api\PermissionApi.cs" />
+    <Compile Include="Api\QueryApi.cs" />
+    <Compile Include="Api\RatingApi.cs" />
+    <Compile Include="Api\RepositoryApi.cs" />
+    <Compile Include="Api\SetApi.cs" />
+    <Compile Include="Api\SettingApi.cs" />
+    <Compile Include="Api\TagApi.cs" />
+    <Compile Include="Api\VersionNumberApi.cs" />
+    <Compile Include="Client\ApiClient.cs" />
+    <Compile Include="Client\ApiException.cs" />
+    <Compile Include="Client\ApiResponse.cs" />
+    <Compile Include="Client\Configuration.cs" />
+    <Compile Include="Client\ExceptionFactory.cs" />
+    <Compile Include="Client\IApiAccessor.cs" />
+    <Compile Include="Model\AdjacencyMatrix.cs" />
+    <Compile Include="Model\CodeValue.cs" />
+    <Compile Include="Model\CommitOptions.cs" />
+    <Compile Include="Model\CreateAgencyRequest.cs" />
+    <Compile Include="Model\CreateCommentRequest.cs" />
+    <Compile Include="Model\DublinCore.cs" />
+    <Compile Include="Model\GetItemsRequest.cs" />
+    <Compile Include="Model\GetLatestItemsRequest.cs" />
+    <Compile Include="Model\GetLatestVersionNumbersRequest.cs" />
+    <Compile Include="Model\GetPermissionsRequest.cs" />
+    <Compile Include="Model\GetRelationshipsRequest.cs" />
+    <Compile Include="Model\GetRepositoryItemDescriptionsRequest.cs" />
+    <Compile Include="Model\GetTypedRelationshipsRequest.cs" />
+    <Compile Include="Model\GraphSearchRequest.cs" />
+    <Compile Include="Model\IdentifierInRequest.cs" />
+    <Compile Include="Model\IdentifierTriple.cs" />
+    <Compile Include="Model\InternationalIdentifier.cs" />
+    <Compile Include="Model\ItemPermission.cs" />
+    <Compile Include="Model\ItemTypePermission.cs" />
+    <Compile Include="Model\LoggedEvent.cs" />
+    <Compile Include="Model\Note.cs" />
+    <Compile Include="Model\RegisterItemsRequest.cs" />
+    <Compile Include="Model\Relationship.cs" />
+    <Compile Include="Model\RelationshipFacet.cs" />
+    <Compile Include="Model\RemovePermissionsRequest.cs" />
+    <Compile Include="Model\RepositoryConflict.cs" />
+    <Compile Include="Model\RepositoryInfo.cs" />
+    <Compile Include="Model\RepositoryItem.cs" />
+    <Compile Include="Model\RepositoryItemMetadata.cs" />
+    <Compile Include="Model\RepositorySecurityContext.cs" />
+    <Compile Include="Model\RepositorySetting.cs" />
+    <Compile Include="Model\RepositoryStatistics.cs" />
+    <Compile Include="Model\SearchRequest.cs" />
+    <Compile Include="Model\SearchResponse.cs" />
+    <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\SearchTypedSetRequest.cs" />
+    <Compile Include="Model\SetSearchFacet.cs" />
+    <Compile Include="Model\TypedAdjacencyMatrix.cs" />
+    <Compile Include="Model\TypedIdTriple.cs" />
+    <Compile Include="Model\TypedRelationship.cs" />
+    <Compile Include="Model\UpdateStateRequest.cs" />
+    <Compile Include="Model\UserComment.cs" />
+    <Compile Include="Model\UserRating.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

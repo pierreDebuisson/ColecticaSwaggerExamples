@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/pierre/wp2/swagger.jar" sourcepath="/swagger/src"/>
+	<classpathentry kind="lib" path="C:/Users/pierre/wp2/okio-1.13.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pierre/wp2/okhttp-2.7.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pierre/wp2/gson-2.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pierre/wp2/joda-time-2.9.9.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
