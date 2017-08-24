@@ -10,9 +10,15 @@
 - execute the following commands
 
 ### Start the server
+#### With command prompt
 ```bash
 cd ColecticaPortal;
 colectica.portal.exe
+```
+#### With bash Terminal
+```bash
+cd ColecticaPortal;
+./colectica.portal.exe
 ```
 
 ### Generate the source code of the client library
