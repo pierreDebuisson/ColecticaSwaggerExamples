@@ -20,6 +20,7 @@ colectica.portal.exe
 cd ColecticaPortal;
 ./colectica.portal.exe
 ```
+ ![alt tag](Docs/ServerStarted.JPG)
 
 ### Generate the source code of the client library
 #### Clone the Swagger-codegen source code
@@ -44,8 +45,11 @@ java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/s
 #### CSharp
 * Open Visual Studio
 * Create a new Library .NetFramework Project
+![alt tag](Docs/NewProjectCSharp.JPG)
 * Add the Folder **Colectica.RestClientV1** in the folder of the new project
+![alt tag](Docs/AddProjectCSharp.JPG)
 * Build the .ddl file
+![alt tag](Docs/BuildMessage.JPG)
 
 #### Java
 * Open your favorite Java IDE
