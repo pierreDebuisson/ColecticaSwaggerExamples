@@ -1,5 +1,5 @@
 # Colectica Swagger Examples
-__NOTE__ : Colectica Portal with Swagger API enabled are required to use this examples.
+__NOTE__ : Colectica Portal with Swagger API enabled are required to use these examples.
 ## How to generate the Swagger API
 - Download the JDK 7 or higher
 [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
