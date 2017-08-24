@@ -1,4 +1,4 @@
-# ColecticaSwaggerExamples
+# Colectica Swagger Examples
 
 ## How to generate the Swagger API
 - Download the JDK 7 or higher
