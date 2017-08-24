@@ -7,7 +7,9 @@ using System.Collections.Generic;
 
 namespace CallAPITests.Api
 {
-
+    /// <summary>
+    /// This class tests <see cref="TagApi"/> on the Colectica Repository 
+    /// </summary>
     public class TagApiTest
     {
         Configuration configuration;
@@ -53,9 +55,8 @@ namespace CallAPITests.Api
         }
 
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();

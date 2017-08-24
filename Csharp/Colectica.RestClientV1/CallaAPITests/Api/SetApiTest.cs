@@ -7,6 +7,9 @@ using CallAPITests.Api;
 
 namespace CallAPITests
 {
+    /// <summary>
+    /// This class tests <see cref="SetApi"/> on the Colectica Repository 
+    /// </summary>
     public class SetApiTest
     {
 
@@ -47,9 +50,8 @@ namespace CallAPITests
         }
 
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();

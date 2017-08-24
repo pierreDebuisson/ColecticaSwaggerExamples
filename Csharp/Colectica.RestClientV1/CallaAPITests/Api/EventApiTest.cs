@@ -6,7 +6,9 @@ using Colectica.RestClientV1.Model;
 
 namespace CallAPITests.Api
 {
-
+    /// <summary>
+    /// This class tests <see cref="EventApi"/> on the Colectica Repository 
+    /// </summary>
     public class EventApiTest
     {
         private EventApi eventApitest;
@@ -47,9 +49,8 @@ namespace CallAPITests.Api
         }
 
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();

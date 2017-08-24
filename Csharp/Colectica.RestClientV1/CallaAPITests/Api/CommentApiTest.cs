@@ -7,14 +7,19 @@ using Xunit;
 
 namespace CallAPITests.Api
 {
-
-    public class CommmentApi
+    /// <summary>
+    /// This class tests <see cref="CommentApi"/> on the Colectica Repository 
+    /// </summary>
+    public class CommentApiTest
     {
         private string basePathTest = "http://localhost:5000";
         private string agencyTest = "int.example";
 
         private static Configuration configuration;
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="CommmentApi"/> with the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreate()
         {
@@ -22,6 +27,9 @@ namespace CallAPITests.Api
             Assert.NotNull(commentApi.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="CommmentApi"/> without the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreateWithoutBasePath()
         {
@@ -29,6 +37,9 @@ namespace CallAPITests.Api
             Assert.NotNull(commentApi.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="CommmentApi"/> with test configuration <see cref="ConfigTest"/>
+        /// </summary>
         [Fact]
         public void OnCreateWithConfiguration()
         {
@@ -37,6 +48,9 @@ namespace CallAPITests.Api
             Assert.NotNull(commentApi.Configuration);
         }
 
+        /// <summary>
+        /// test for adding a comment in the Colectica Repository with a <see cref="CreateCommentRequest"/>.
+        /// </summary>
         [Fact]
         public void ApiV1ItemByAgencyByIdByVersionCommentPostAsyncWithHttpInfo()
         {
@@ -52,12 +66,15 @@ namespace CallAPITests.Api
 
         }
 
+        /// <summary>
+        /// test for getting a comment from the Colectica Repository with a <see cref="UserComment"/>.
+        /// </summary>
         [Fact]
-        public void ApiV1ItemByAgencyByIdByVersionCommentGetAsyncWithHttpInfo()
+        public void ApiV1ItemByAgencyByIdCommentGetWithHttpInfo()
         {
             configuration = GetClientConfig();
             CommentApi commentApiTest = new CommentApi(configuration);
-            
+
             ApiResponse<List<UserComment>> response = commentApiTest.ApiV1ItemByAgencyByIdCommentGetWithHttpInfo(agencyTest, new Guid("52c5dd34-1b5f-460b-8904-6f0f2897f6a1"));
             Assert.Equal(200, response.StatusCode);
             DateTime dt = DateTime.Parse("2017-08-21 20:07:30.023");
@@ -65,10 +82,8 @@ namespace CallAPITests.Api
             Assert.Contains(userCommentToCheck, response.Data);
 
         }
-        /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
-        /// </summary>
-        [Fact]
+
+
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();

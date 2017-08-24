@@ -8,6 +8,9 @@ using Xunit;
 namespace CallAPITests.Api
 {
 
+    /// <summary>
+    /// This class tests <see cref="RatingApi"/> on the Colectica Repository 
+    /// </summary>
     public class RattingApiTest
     {
 
@@ -52,9 +55,8 @@ namespace CallAPITests.Api
 
 
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();

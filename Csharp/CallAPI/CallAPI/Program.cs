@@ -14,7 +14,7 @@ namespace CallAPI
     {
         static void Main(string[] args)
         {
-
+            //Using test Guid : You have to replace them by yours.
             GetListItems("52c5dd34-1b5f-460b-8904-6f0f2897f6a1");
             Console.WriteLine("/////////////////////////////////////////////////////////");
             Console.WriteLine("/////////////////////////////////////////////////////////");
@@ -27,7 +27,13 @@ namespace CallAPI
             Console.ReadLine();
         }
 
-
+        /// <summary>
+        /// Get the list of children Items for the parentID for a specific agency 
+        /// and a specific type.
+        /// </summary>
+        /// <param name="agency"></param>
+        /// <param name="parentID"></param>
+        /// <param name="itemType"></param>
         private static void GetListItems(string agency, string parentID, string itemType)
         {
             //Converting string parameter to GUID
@@ -69,6 +75,14 @@ namespace CallAPI
 
         }
 
+        /// <summary>
+        /// Get the list of children Items for the parentID for a specific agency 
+        /// and a specific type with a limit of objects returned.
+        /// </summary>
+        /// <param name="agency"></param>
+        /// <param name="parentID"></param>
+        /// <param name="itemType"></param>
+        /// <param name="limitMax"></param>
         private static void GetListItems(string agency, string parentID, string itemType, long limitMax)
         {
             //Converting string parameter to GUID
@@ -111,7 +125,10 @@ namespace CallAPI
 
         }
 
-
+        /// <summary>
+        /// Get the list of children Items for the Parent.
+        /// </summary>
+        /// <param name="parentID"></param>
         private static void GetListItems(string parentID)
         {
 

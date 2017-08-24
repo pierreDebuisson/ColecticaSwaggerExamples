@@ -7,7 +7,9 @@ using Xunit;
 
 namespace CallAPITests.Api
 {
-
+    /// <summary>
+    /// This class tests <see cref="QueryApi"/> on the Colectica Repository 
+    /// </summary>
     public class QueryApiTest
     {
         private QueryApi queryApiTest;
@@ -47,13 +49,14 @@ namespace CallAPITests.Api
         //    };
         //    SearchRequest searchRequest = new SearchRequest(cultures);
         //    SearchResponse response = queryApiTest.ApiV1QueryPost(searchRequest);
-            
+
         //    Assert.NotNull(response);
         //}
+
+
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();

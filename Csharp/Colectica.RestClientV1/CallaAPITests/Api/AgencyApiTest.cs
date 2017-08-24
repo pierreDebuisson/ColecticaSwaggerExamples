@@ -7,7 +7,9 @@ using CallAPITests.Api;
 
 namespace CallAPITests
 {
-
+    /// <summary>
+    /// This class tests <see cref="AgencyApi"/> on the Colectica Repository 
+    /// </summary>
     public class AgencyAPITest
     {
         private string basePath;
@@ -18,6 +20,9 @@ namespace CallAPITests
             basePath = "http://localhost:5000";
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="AgencyApi"/> with the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OneCreate()
         {
@@ -25,6 +30,9 @@ namespace CallAPITests
             Assert.NotNull(agencyApiTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="AgencyApi"/> whithout the basePath
+        /// </summary>
         [Fact]
         public void OneCreateWithoutBasePath()
         {
@@ -32,6 +40,9 @@ namespace CallAPITests
             Assert.NotNull(agencyApiTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="AgencyApi"/> with the test Configuration
+        /// </summary>
         [Fact]
         public void OneCreateWithConfiguration()
         {
@@ -39,6 +50,10 @@ namespace CallAPITests
             Assert.NotNull(agencyApiTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the method ApiV1AgencyByAgencyDeleteWithHttpInfo() as a [Fact] (Always True) 
+        /// you can use [Theory]("param1",param2") instead. Examples: <see cref="ItemAPITest"/>
+        /// </summary>
         [Fact]
         public void ApiV1AgencyByAgencyDeleteWithHttpInfo()
         {
@@ -53,7 +68,7 @@ namespace CallAPITests
         }
 
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
         [Fact]
         public Configuration GetClientConfig()

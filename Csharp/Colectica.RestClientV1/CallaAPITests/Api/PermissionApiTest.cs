@@ -7,7 +7,9 @@ using Xunit;
 
 namespace CallAPITests.Api
 {
-
+    /// <summary>
+    /// This class tests <see cref="PermissionApi"/> on the Colectica Repository 
+    /// </summary>
     public class PermissionApiTest
     {
         private string basePath = "http://localhost:5000";
@@ -92,9 +94,8 @@ namespace CallAPITests.Api
         }
 
         /// <summary>  
-        ///  This method return and test a kind of Client Configuration for calling the API.
+        ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();
