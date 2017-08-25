@@ -53,6 +53,7 @@ namespace CallAPITests
         /// <summary>
         /// Test of the method ApiV1AgencyByAgencyDeleteWithHttpInfo() as a [Fact] (Always True) 
         /// you can use [Theory]("param1",param2") instead. Examples: <see cref="ItemAPITest"/>
+        /// or <see cref="SetApiTest"/>
         /// </summary>
         [Fact]
         public void ApiV1AgencyByAgencyDeleteWithHttpInfo()

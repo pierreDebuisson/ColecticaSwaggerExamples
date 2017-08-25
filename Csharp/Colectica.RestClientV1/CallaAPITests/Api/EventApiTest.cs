@@ -16,6 +16,9 @@ namespace CallAPITests.Api
         private string basePath = "http://localhost:5000";
         private DateTime dt = DateTime.Now;
 
+        /// <summary>
+        /// This method tests the instanciation of <see cref="EventApi"/> with the Configuration Test <see cref="ConfigTest"/>
+        /// </summary>
         [Fact]
         public void OneCreateWithConfig()
         {
@@ -24,6 +27,9 @@ namespace CallAPITests.Api
             Assert.NotNull(eventApitest.Configuration);
         }
 
+        /// <summary>
+        /// This method tests the instanciation of <see cref="EventApi"/> with the basePath
+        /// </summary>
         [Fact]
         public void OneCreate()
         {
@@ -31,6 +37,9 @@ namespace CallAPITests.Api
             Assert.NotNull(eventApitest.Configuration);
         }
 
+        /// <summary>
+        /// This method tests the instanciation of <see cref="EventApi"/> without the basePath
+        /// </summary>
         [Fact]
         public void OneCreateWithoutBasePath()
         {
@@ -38,6 +47,9 @@ namespace CallAPITests.Api
             Assert.NotNull(eventApitest.Configuration);
         }
 
+        /// <summary>
+        /// This method tests the addition of an of <see cref="EventApi"/> to the Repository
+        /// </summary>
         [Fact]
         public void ApiV1EventPostWithHttpInfo()
         {

@@ -16,6 +16,10 @@ namespace CallAPITests.Api
         private Configuration configuratiopn;
         private string basePath = "http://localhost:5000";
 
+        /// <summary>
+        /// This method tests the instanciation of <see cref="QueryApi"/> on the Colectica Repository 
+        /// with the ConfigTest <see cref="ConfigTest"/>
+        /// </summary>
         [Fact]
         public void OnCreateWithConfiguration()
         {
@@ -24,6 +28,10 @@ namespace CallAPITests.Api
             Assert.NotNull(queryApiTest.Configuration);
         }
 
+        /// <summary>
+        /// This method tests the instanciation of <see cref="QueryApi"/> on the Colectica Repository 
+        /// without the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreateWithoutPath()
         {
@@ -31,6 +39,10 @@ namespace CallAPITests.Api
             Assert.NotNull(queryApiTest.Configuration);
         }
 
+        /// <summary>
+        /// This method tests the instanciation of <see cref="QueryApi"/> on the Colectica Repository 
+        /// with the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreate()
         {

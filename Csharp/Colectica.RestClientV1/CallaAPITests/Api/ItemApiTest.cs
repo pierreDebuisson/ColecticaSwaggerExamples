@@ -41,7 +41,7 @@ namespace CallAPITests
             var instanceList = new ItemApi(configuration);
             var responseList = instanceList.ApiV1ItemGetListLatestPost(request);
 
-            //TODO: to developp
+            /// <see cref="QueryApi.ApiV1QueryRelationshipByobjectDescriptionsPost(GraphSearchRequest)"/>
             //var mapItemsChild = new Dictionary<RepositoryItem, List<RepositoryItem>>();
             foreach (RepositoryItem item in responseList)
             {
@@ -130,8 +130,9 @@ namespace CallAPITests
             IdentifierInRequest item = new IdentifierInRequest("int.example", guid, 1L);
             identifiers.Add(item);
             request.Identifiers = identifiers;
-            var response = instanceList.ApiV1ItemGetDescriptionsPost(request);
-            Assert.NotEmpty(response);
+            List<RepositoryItemMetadata> response = instanceList.ApiV1ItemGetDescriptionsPost(request);
+            
+            Assert.True(response.Count>0);
 
         }
 

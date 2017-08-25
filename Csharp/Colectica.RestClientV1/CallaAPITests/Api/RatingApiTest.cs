@@ -11,13 +11,16 @@ namespace CallAPITests.Api
     /// <summary>
     /// This class tests <see cref="RatingApi"/> on the Colectica Repository 
     /// </summary>
-    public class RattingApiTest
+    public class RatingApiTest
     {
 
         private RatingApi ratingApiTest;
         private Configuration configuration;
         private string basePath = "http://localhost:5000";
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="RatingApi"/> with the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OneCreate()
         {
@@ -25,6 +28,9 @@ namespace CallAPITests.Api
             Assert.NotNull(ratingApiTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="RatingApi"/> without the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OneCreateWithoutBasepath()
         {
@@ -32,6 +38,9 @@ namespace CallAPITests.Api
             Assert.NotNull(ratingApiTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="RatingApi"/> with the configTest <see cref="ConfigTest"/>
+        /// </summary>
         [Fact]
         public void OneCreateWithConfiguration()
         {
@@ -40,6 +49,9 @@ namespace CallAPITests.Api
             Assert.NotNull(ratingApiTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the addition of  a <see cref="RatingApi"/> instance to the Colectica repository.
+        /// </summary>
         [Fact]
         public void ApiV1ItemByAgencyByIdByVersionRatingPostWithHttpInfoTest()
         {

@@ -16,6 +16,9 @@ namespace CallAPITests.Api
         private PermissionApi permissionTest = new PermissionApi("http://localhost:5000");
         private Configuration configuration;
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="PermissionApi"/> with the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreate()
         {
@@ -24,6 +27,9 @@ namespace CallAPITests.Api
             Assert.NotNull(permissionTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="PermissionApi"/> without the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreateWhithOutBasePath()
         {
@@ -32,6 +38,21 @@ namespace CallAPITests.Api
             Assert.NotNull(permissionTest.Configuration);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="PermissionApi"/> with the configurationTest <see cref="ConfigTest"/>
+        /// </summary>
+        [Fact]
+        public void OnCreateWhithConfiguration()
+        {
+            configuration = GetClientConfig();
+            permissionTest = new PermissionApi(configuration);
+
+            Assert.NotNull(permissionTest.Configuration);
+        }
+
+        /// <summary>
+        /// This method test the addition and deletion of a Permission <see cref="PermissionApi"/> on th repository.
+        /// </summary>
         [Fact]
         public void ApiV1PermissionCreateAndDeletePost()
         {
@@ -72,6 +93,10 @@ namespace CallAPITests.Api
             Assert.Equal(200, response.StatusCode);
             Assert.Equal(200, responsePost.StatusCode);
         }
+
+        /// <summary>
+        /// This method test the obtention of a Permission <see cref="PermissionApi"/> on th repository.
+        /// </summary>
         [Fact]
         public void ApiV1PermissionGetPostWithHttpInfoTest()
         {

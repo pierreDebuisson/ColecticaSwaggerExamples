@@ -40,10 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Colectica.RestClientV1">
-      <HintPath>..\bin\Release\Colectica.RestClientV1.dll</HintPath>
+      <HintPath>..\bin\Debug\Colectica.RestClientV1.dll</HintPath>
     </Reference>
     <Reference Include="ColecticaAutorestAPI">
-      <HintPath>..\..\..\..\..\source\repos\ColecticAutorestAPI\ColecticAutorestAPI\bin\Debug\netcoreapp2.0\ColecticaAutorestAPI.dll</HintPath>
+      <HintPath>..\ColecticaAutorestAPI.dll</HintPath>
     </Reference>
     <Reference Include="Gallio, Version=3.3.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <HintPath>..\packages\Gallio.3.3.1\lib\NET40\Gallio.dll</HintPath>

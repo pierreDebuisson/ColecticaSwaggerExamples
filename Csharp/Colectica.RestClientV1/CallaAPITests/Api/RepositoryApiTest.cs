@@ -15,6 +15,9 @@ namespace CallAPITests.Api
 
         private Configuration configuration;
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="RepositoryApi"/> with the basePath (part of the URL)
+        /// </summary>
         [Fact]
         public void OnCreate()
         {
@@ -22,6 +25,9 @@ namespace CallAPITests.Api
             Assert.NotNull(repositoryApi);
         }
 
+        /// <summary>
+        /// Test of the instanciation of <see cref="RepositoryApi"/> without the basePath.
+        /// </summary>
         [Fact]
         public void OnCreateWithoutBasePath()
         {
@@ -30,6 +36,9 @@ namespace CallAPITests.Api
             Assert.NotNull(repositoryApi.Configuration);
         }
 
+        /// <summary>
+        /// Test of the obtention of a<see cref="RepositoryApi"/> 
+        /// </summary>
         [Fact]
         public void ApiV1RepositoryInfoGetTest()
         {
@@ -39,7 +48,10 @@ namespace CallAPITests.Api
             Assert.NotNull(info);
 
         }
-
+        /// <summary>
+        /// Test of the obtention of informations about <see cref="RepositoryApi"/> with the HTTP Header a<see cref="ApiResponse{T}
+        /// "/>
+        /// </summary>
         [Fact]
         public void ApiV1RepositoryInfoGetWithHttpInfo()
         {
@@ -50,6 +62,9 @@ namespace CallAPITests.Api
             Assert.Equal(200, info.StatusCode);
         }
 
+        /// <summary>
+        /// Test of the creation of a task a<see cref="Task"/> in the queue.
+        /// </summary>
         [Fact]
         public void AsyncApiV1RepositoryInfoGetTest()
         {
@@ -60,6 +75,10 @@ namespace CallAPITests.Api
 
         }
 
+        /// <summary>
+        /// Test of the creation of a task a<see cref="Task"/> with the HTTP Header a<see cref="ApiResponse{T}
+        /// "/>
+        /// </summary>
         [Fact]
         public void AsyncApiV1RepositoryInfoGetWithHttpInfo()
         {
@@ -69,6 +88,10 @@ namespace CallAPITests.Api
             Assert.NotNull(task.Id.ToString());
         }
 
+        /// <summary>
+        /// Test of the obtention of statistics about <see cref="RepositoryApi"/> 
+        /// />
+        /// </summary>
         [Fact]
         public void ApiV1RepositoryStatisticsGet()
         {
@@ -78,6 +101,9 @@ namespace CallAPITests.Api
             Assert.NotNull(stats);
         }
 
+        /// <summary>
+        /// Test of the creation of a task a<see cref="Task"/> 
+        /// </summary>
         [Fact]
         public void AsyncApiV1RepositoryStatisticsGet()
         {
@@ -87,15 +113,22 @@ namespace CallAPITests.Api
             Assert.NotNull(task.Id.ToString());
         }
 
+        /// <summary>
+        /// Test of the obtention of statistics about <see cref="RepositoryApi"/> 
+        ///  with HTTP header./>
+        /// </summary>
         [Fact]
         public void ApiV1RepositoryStatisticsGetWithHttpInfo()
         {
             configuration = GetClientConfig();
             RepositoryApi repositoryApi = new RepositoryApi(configuration);
             ApiResponse<RepositoryStatistics> stats = repositoryApi.ApiV1RepositoryStatisticsGetWithHttpInfo();
-            Assert.Equal(200,stats.StatusCode);
+            Assert.Equal(200, stats.StatusCode);
         }
-
+        /// <summary>
+        /// Test of the creation of a task a<see cref="Task"/> 
+        ///with the HTTP Header a<see cref="ApiResponse{T}
+        /// "/>
         [Fact]
         public void AsyncApiV1RepositoryStatisticsGetWithHttpInfo()
         {
