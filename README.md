@@ -59,7 +59,7 @@ java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/s
 
 ### Use the client library
 #### CSharp
-* Add the reference of the dll to your Client Project via project --> Add ---> reference
+* Add the reference of the dll to your client project via project --> Add ---> reference
 
 #### Java
 * Add the dependencies to your Java Build Path (i.e .jar) + swagger.jar (library previously built)
