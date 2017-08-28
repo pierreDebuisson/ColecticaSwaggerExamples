@@ -6,4 +6,6 @@ before_install:
   - pwd
   - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
   - gradle assemble
+  - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
   - gradle check
+  - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
