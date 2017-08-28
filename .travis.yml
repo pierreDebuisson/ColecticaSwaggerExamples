@@ -1,5 +1,5 @@
 language: java
-sudo: true
+sudo: false
 before_install:
   - pwd
   - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
