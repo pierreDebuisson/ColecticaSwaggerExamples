@@ -1,1 +1,7 @@
 language: java
+before_install:
+cd /java/JavaSwagerApiInsee/
+jdk:
+- openjdk8
+os :
+- Windows
