@@ -1,2 +1,4 @@
-language: csharp
-solution: Csharp/CallAPI/CallAPI.sln
+language: java
+sudo: true
+before_install:
+pwd
