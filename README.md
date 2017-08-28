@@ -1,4 +1,6 @@
 # Colectica Swagger Examples
+[![Build Status](https://api.travis-ci.org/toddmotto/public-apis.svg)](https://travis-ci.org/toddmotto/public-apis)
+
 __NOTE__ : Colectica Portal with Swagger API enabled are required to use these examples.
 ## How to generate the Swagger API
 - Download the JDK 7 or higher
@@ -44,22 +46,21 @@ java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/s
 ### Build the client library
 #### CSharp
 * Open Visual Studio
-* Create a new Library .NetFramework Project
+* Create a new project .NetFramework library
 ![alt tag](Docs/NewProjectCSharp.JPG)
-* Add the Folder **Colectica.RestClientV1** in the folder of the new project
+* Add the folder **Colectica.RestClientV1** to the folder of the new project
 ![alt tag](Docs/AddProjectCSharp.JPG)
-* Build the .ddl file
+* Build the .dll file
 ![alt tag](Docs/BuildMessage.JPG)
 
 #### Java
 * Open your favorite Java IDE
 * Import the **Java/swagger** Folder in your project
 * Export your project as a .jar file
-* Add the dependencies to your Java Build Path (i.e .jar)
 
 ### Use the client library
 #### CSharp
-* Add the reference of the dll in your Client Project via project --> Add ---> reference
+* Add the reference of the dll to your client project via project --> Add ---> reference
 
 #### Java
 * Add the dependencies to your Java Build Path (i.e .jar) + swagger.jar (library previously built)
