@@ -1,5 +1,5 @@
 # Colectica Swagger Examples
-[![Build Status](https://api.travis-ci.org/toddmotto/public-apis.svg)](https://travis-ci.org/toddmotto/public-apis)
+[![Build Status](https://api.travis-ci.org/pierreDebuisson/ColecticaSwaggerExamples.svg)](https://api.travis-ci.org/pierreDebuisson/ColecticaSwaggerExamples)
 
 __NOTE__ : Colectica Portal with Swagger API enabled are required to use these examples.
 ## How to generate the Swagger API
