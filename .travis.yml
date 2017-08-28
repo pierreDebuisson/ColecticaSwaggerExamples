@@ -1,2 +1,2 @@
 language: csharp
-solution: CallAPI.sln
+solution: Csharp/CallAPI/CallAPI.sln
