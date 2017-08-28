@@ -1,4 +1,5 @@
 # Colectica Swagger Examples
+[![Build Status](https://api.travis-ci.org/toddmotto/public-apis.svg)](https://travis-ci.org/toddmotto/public-apis)
 __NOTE__ : Colectica Portal with Swagger API enabled are required to use these examples.
 ## How to generate the Swagger API
 - Download the JDK 7 or higher
