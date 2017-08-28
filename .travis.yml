@@ -4,4 +4,5 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y openjdk-8-jdk
   - pwd
-  - cd java/JavaSwaggerApiInseeGraddle/
+  - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
+  - gradle check
