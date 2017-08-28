@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallAPI", "CallAPI\CallAPI.csproj", "{9ADAE494-96AC-4B57-A5CF-E471CCA96700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colectica.RestClientV1", "..\Colectica.RestClientV1\Colectica.RestClientV1.csproj", "{0578089A-9E4B-45E5-AD11-5EEDE2881395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallAPITests", "..\Colectica.RestClientV1\CallaAPITests\CallAPITests.csproj", "{AE402A59-5282-4AF6-8850-322AE153D5EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{9ADAE494-96AC-4B57-A5CF-E471CCA96700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ADAE494-96AC-4B57-A5CF-E471CCA96700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ADAE494-96AC-4B57-A5CF-E471CCA96700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0578089A-9E4B-45E5-AD11-5EEDE2881395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0578089A-9E4B-45E5-AD11-5EEDE2881395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0578089A-9E4B-45E5-AD11-5EEDE2881395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0578089A-9E4B-45E5-AD11-5EEDE2881395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE402A59-5282-4AF6-8850-322AE153D5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE402A59-5282-4AF6-8850-322AE153D5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE402A59-5282-4AF6-8850-322AE153D5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE402A59-5282-4AF6-8850-322AE153D5EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
