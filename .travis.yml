@@ -1,11 +1,9 @@
 language: java
 sudo: true
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y openjdk-8-jdk
   - pwd
   - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
   - gradle assemble
   - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
-  - gradle check
-  - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
+  - mv Java/JavaBuildGraddle/JavaSwaggerApiInseeGraddle/ /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples
+
