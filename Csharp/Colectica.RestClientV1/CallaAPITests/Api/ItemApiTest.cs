@@ -4,6 +4,7 @@ using Colectica.RestClientV1.Client;
 using Colectica.RestClientV1.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace CallAPITests
@@ -58,9 +59,9 @@ namespace CallAPITests
         [InlineData("52c5dd34-1b5f-460b-8904-6f0f2897f6a1")]
         public void GetListItemsByParentIDTest(string parentID)
         {
-            
+
             var configuration = GetClientConfig();
-           
+
 
             //GET the Sets
             var instanceSets = new Colectica.RestClientV1.Api.SetApi(configuration);
@@ -85,6 +86,51 @@ namespace CallAPITests
                     Console.WriteLine(item.ToJson());
                 }
             }
+
+        }
+
+        /// <summary>
+        /// This method tests the output of th results as a json file
+        /// </summary>
+        /// <param name="parentID"></param>
+        [Theory]
+        [InlineData("52c5dd34-1b5f-460b-8904-6f0f2897f6a1")]
+        public void GetListItemsByParentIDFileTest(string parentID)
+        {
+            if (!(Directory.Exists("c:/temp")))
+            {
+                Directory.CreateDirectory("c:/temp");
+            }
+            StreamWriter fw = new StreamWriter("C:/temp/test.json");
+            
+            var configuration = GetClientConfig();
+            //GET the Sets
+            var instanceSets = new Colectica.RestClientV1.Api.SetApi(configuration);
+            Guid guid = new Guid(parentID);
+            var responseSets = instanceSets.ApiV1SetByAgencyByIdByVersionGet("int.example", guid, 1);
+
+            //GET the list of GUID            
+            GetLatestItemsRequest request = new GetLatestItemsRequest
+            {
+                Identifiers = new List<IdentifierInRequest>()
+            };
+            foreach (IdentifierTriple itemTriple in responseSets)
+            {
+                request.Identifiers.Add(new IdentifierInRequest(itemTriple.Item3, itemTriple.Item1, itemTriple.Item2));
+            }
+            var instanceList = new ItemApi(configuration);
+            var responseList = instanceList.ApiV1ItemGetListLatestPost(request);
+            foreach (RepositoryItem item in responseList)
+            {
+                if (item != null)
+                {
+                    fw.WriteLine(item.ToJson());
+                }
+            }
+            fw.Close();
+            Assert.True(File.Exists("C:/temp/test.json"));
+            File.Delete("C:/temp/test.json");
+            Assert.False(File.Exists("C:/temp/test.json"));
 
         }
 
@@ -131,8 +177,8 @@ namespace CallAPITests
             identifiers.Add(item);
             request.Identifiers = identifiers;
             List<RepositoryItemMetadata> response = instanceList.ApiV1ItemGetDescriptionsPost(request);
-            
-            Assert.True(response.Count>0);
+
+            Assert.True(response.Count > 0);
 
         }
 
