@@ -1,3 +1,1 @@
-language: csharp
-solution: Csharp/CallAPI/CallAPI.sln
-os: windows
+language: java
