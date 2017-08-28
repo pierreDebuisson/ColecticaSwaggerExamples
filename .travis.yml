@@ -5,5 +5,5 @@ before_install:
   - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
   - gradle assemble
   - cd /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples/Java/JavaSwaggerApiInseeGraddle/
-  - mv Java/JavaBuildGraddle/JavaSwaggerApiInseeGraddle/ /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples
+  - mv Java/JavaBuildGraddle/ /home/travis/build/pierreDebuisson/ColecticaSwaggerExamples
 
