@@ -1,5 +1,5 @@
 language: java
 sudo: true
-before_install:
+before_deploy:
 - pwd
 - cd ./java/JavaSwaggerApiInseeGraddle
