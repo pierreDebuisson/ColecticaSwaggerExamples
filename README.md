@@ -61,7 +61,10 @@ java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/s
 #### Java
 * Open your favorite Java IDE
 * Import the **Java/swagger** Folder in your project
+![alt tag](Docs/ImportProjectEclipse.JPG)
+
 * Export your project as a .jar file
+![alt tag](Docs/exportSwaggerJAR.JPG)
 
 ### Use the client library
 #### CSharp
@@ -69,3 +72,4 @@ java -jar swagger-codegen-cli.jar generate -i http://localhost:5000/swagger/v1/s
 
 #### Java
 * Add the dependencies to your Java Build Path (i.e .jar) + swagger.jar (library previously built)
+![alt tag](Docs/AddExternalJAR.JPG)
