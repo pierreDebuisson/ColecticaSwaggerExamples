@@ -1,10 +1,18 @@
 package fr.insee.swagger;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
+import javax.security.cert.Certificate;
 
 import io.swagger.client.*;
 import io.swagger.client.api.ItemApi;
@@ -16,6 +24,8 @@ import io.swagger.client.model.RepositoryItem;
 import io.swagger.client.model.TypedIdTriple;
 
 import com.google.gson.*;
+import com.squareup.okhttp.CertificatePinner;
+import com.squareup.okhttp.OkHttpClient;
 
 /**
  * 
@@ -26,10 +36,15 @@ public class ClasseDeTest {
 
 	private static ApiClient client = new ApiClient();
 	// Configuration a appliquer à l'APIClient
-	private static Configuration configuration = getConfiguration();
+	private static Configuration configuration;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		
+		
+
+		 
 		try {
+			configuration = getConfiguration();
 			System.out.println("TEST de la méthode par itemType :");
 			// TODO: Remplacer les valeurs
 			System.out.println(getListItemsByAgencyByParentIdByItemType("int.example",
@@ -43,6 +58,7 @@ public class ClasseDeTest {
 
 			e.printStackTrace();
 		}
+		 
 
 	}
 
@@ -50,16 +66,17 @@ public class ClasseDeTest {
 	 * Méthode de valorisation des informations de connexion à l' API
 	 * 
 	 * @return Configuration du client
+	 * @throws IOException
 	 */
-	private static Configuration getConfiguration() {
+	private static Configuration getConfiguration() throws IOException {
 		// TODO: Mettre la configuration Hermes
-		client.setBasePath("http://localhost:5000");
+		client.setBasePath("https://quill.colectica.org/");
 		configuration = new Configuration();
-		client.setApiKey("ADMINKEY");
-		client.addDefaultHeader("api_key", "ADMINKEY");
-		//Reglages pour le certificat
-		//InputStream sslCaCert;
-		//client.setSslCaCert(sslCaCert);
+		client.setApiKey("QUILLTEST");
+		client.addDefaultHeader("api_key", "QUILLTEST");
+		
+		
+		
 
 		configuration.setDefaultApiClient(client);
 		return configuration;
@@ -189,4 +206,3 @@ public class ClasseDeTest {
 	}
 
 }
-
