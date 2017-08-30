@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27DAA67E-81E0-401F-92C2-8394F12FC09C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AutoRestApi</RootNamespace>
+    <AssemblyName>AutoRestApi</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.9\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Generated\ApiV1.cs" />
+    <Compile Include="Generated\ApiV1Extensions.cs" />
+    <Compile Include="Generated\ApiV1Item.cs" />
+    <Compile Include="Generated\ApiV1ItemByAgencyByIdByTagVersions.cs" />
+    <Compile Include="Generated\ApiV1ItemByAgencyByIdByTagVersionsExtensions.cs" />
+    <Compile Include="Generated\ApiV1ItemByAgencyByIdVersions.cs" />
+    <Compile Include="Generated\ApiV1ItemByAgencyByIdVersionsExtensions.cs" />
+    <Compile Include="Generated\ApiV1ItemExtensions.cs" />
+    <Compile Include="Generated\ApiV1Permission.cs" />
+    <Compile Include="Generated\ApiV1PermissionExtensions.cs" />
+    <Compile Include="Generated\ColecticaRepositoryRESTAPI.cs" />
+    <Compile Include="Generated\ColecticaRepositoryRESTAPIExtensions.cs" />
+    <Compile Include="Generated\IApiV1.cs" />
+    <Compile Include="Generated\IApiV1Item.cs" />
+    <Compile Include="Generated\IApiV1ItemByAgencyByIdByTagVersions.cs" />
+    <Compile Include="Generated\IApiV1ItemByAgencyByIdVersions.cs" />
+    <Compile Include="Generated\IApiV1Permission.cs" />
+    <Compile Include="Generated\IColecticaRepositoryRESTAPI.cs" />
+    <Compile Include="Generated\Models\AdjacencyMatrix.cs" />
+    <Compile Include="Generated\Models\CodeValue.cs" />
+    <Compile Include="Generated\Models\CommitOptions.cs" />
+    <Compile Include="Generated\Models\CreateAgencyRequest.cs" />
+    <Compile Include="Generated\Models\CreateCommentRequest.cs" />
+    <Compile Include="Generated\Models\DublinCore.cs" />
+    <Compile Include="Generated\Models\GetItemsRequest.cs" />
+    <Compile Include="Generated\Models\GetLatestItemsRequest.cs" />
+    <Compile Include="Generated\Models\GetLatestVersionNumbersRequest.cs" />
+    <Compile Include="Generated\Models\GetPermissionsRequest.cs" />
+    <Compile Include="Generated\Models\GetRelationshipsRequest.cs" />
+    <Compile Include="Generated\Models\GetRepositoryItemDescriptionsRequest.cs" />
+    <Compile Include="Generated\Models\GetTypedRelationshipsRequest.cs" />
+    <Compile Include="Generated\Models\GraphSearchRequest.cs" />
+    <Compile Include="Generated\Models\IdentifierInRequest.cs" />
+    <Compile Include="Generated\Models\IdentifierTriple.cs" />
+    <Compile Include="Generated\Models\InternationalIdentifier.cs" />
+    <Compile Include="Generated\Models\ItemPermission.cs" />
+    <Compile Include="Generated\Models\ItemTypePermission.cs" />
+    <Compile Include="Generated\Models\LoggedEvent.cs" />
+    <Compile Include="Generated\Models\Note.cs" />
+    <Compile Include="Generated\Models\RegisterItemsRequest.cs" />
+    <Compile Include="Generated\Models\Relationship.cs" />
+    <Compile Include="Generated\Models\RelationshipFacet.cs" />
+    <Compile Include="Generated\Models\RemovePermissionsRequest.cs" />
+    <Compile Include="Generated\Models\RepositoryConflict.cs" />
+    <Compile Include="Generated\Models\RepositoryInfo.cs" />
+    <Compile Include="Generated\Models\RepositoryItem.cs" />
+    <Compile Include="Generated\Models\RepositoryItemMetadata.cs" />
+    <Compile Include="Generated\Models\RepositorySecurityContext.cs" />
+    <Compile Include="Generated\Models\RepositorySetting.cs" />
+    <Compile Include="Generated\Models\RepositoryStatistics.cs" />
+    <Compile Include="Generated\Models\SearchRequest.cs" />
+    <Compile Include="Generated\Models\SearchResponse.cs" />
+    <Compile Include="Generated\Models\SearchResult.cs" />
+    <Compile Include="Generated\Models\SearchTypedSetRequest.cs" />
+    <Compile Include="Generated\Models\SetSearchFacet.cs" />
+    <Compile Include="Generated\Models\TypedAdjacencyMatrix.cs" />
+    <Compile Include="Generated\Models\TypedIdTriple.cs" />
+    <Compile Include="Generated\Models\TypedRelationship.cs" />
+    <Compile Include="Generated\Models\UpdateStateRequest.cs" />
+    <Compile Include="Generated\Models\UserComment.cs" />
+    <Compile Include="Generated\Models\UserRating.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

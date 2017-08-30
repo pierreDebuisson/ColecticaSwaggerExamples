@@ -66,11 +66,12 @@ namespace CallAPITests.Api
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();
-            var client = new ApiClient("http://localhost:5000");
+            var client = new ApiClient(configTest.BasePath);
 
             var configuration = new Configuration(client);
             configuration.ApiKey.Add(configTest.ApiKeyPrefix, configTest.ApiKey);
             configuration.AddDefaultHeader(configTest.ApiKeyPrefix, configTest.ApiKey);
+            
             Assert.NotNull(configuration);
             return configuration;
 

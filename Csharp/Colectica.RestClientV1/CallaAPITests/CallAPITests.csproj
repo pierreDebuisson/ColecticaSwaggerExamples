@@ -39,12 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Colectica.RestClientV1">
-      <HintPath>..\bin\Debug\Colectica.RestClientV1.dll</HintPath>
-    </Reference>
-    <Reference Include="ColecticaAutorestAPI">
-      <HintPath>..\ColecticaAutorestAPI.dll</HintPath>
-    </Reference>
     <Reference Include="Gallio, Version=3.3.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <HintPath>..\packages\Gallio.3.3.1\lib\NET40\Gallio.dll</HintPath>
     </Reference>
@@ -107,6 +101,16 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.6.1\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\..\source\repos\AutoRestApi\AutoRestApi\AutoRestApi.csproj">
+      <Project>{27daa67e-81e0-401f-92c2-8394f12fc09c}</Project>
+      <Name>AutoRestApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Colectica.RestClientV1.csproj">
+      <Project>{0578089a-9e4b-45e5-ad11-5eede2881395}</Project>
+      <Name>Colectica.RestClientV1</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

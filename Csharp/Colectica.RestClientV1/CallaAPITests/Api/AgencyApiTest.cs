@@ -67,15 +67,13 @@ namespace CallAPITests
             ApiResponse<Object> responsesCreation = agencyApiTest.ApiV1AgencyPostWithHttpInfo(requestAgency);
             Assert.Equal(200, responsesCreation.StatusCode);
         }
-
         /// <summary>  
         ///  This method return and test a kind of Client Configuration <see cref="ConfigTest"/> for calling the API.
         /// </summary>
-        [Fact]
         public Configuration GetClientConfig()
         {
             ConfigTest configTest = new ConfigTest();
-            var client = new ApiClient("http://localhost:5000");
+            var client = new ApiClient(configTest.BasePath);
 
             var configuration = new Configuration(client);
             configuration.ApiKey.Add(configTest.ApiKeyPrefix, configTest.ApiKey);

@@ -14,16 +14,23 @@ namespace CallAPI
     {
         static void Main(string[] args)
         {
-            //Using test Guid : You have to replace them by yours.
-            GetListItems("52c5dd34-1b5f-460b-8904-6f0f2897f6a1");
-            Console.WriteLine("/////////////////////////////////////////////////////////");
-            Console.WriteLine("/////////////////////////////////////////////////////////");
-            Console.WriteLine("/////////////////////////////////////////////////////////" + "\n");
-            GetListItems("int.example", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1", "a1bb19bd-a24a-4443-8728-a6ad80eb42b8");
-            Console.WriteLine("/////////////////////////////////////////////////////////");
-            Console.WriteLine("/////////////////////////////////////////////////////////");
-            Console.WriteLine("/////////////////////////////////////////////////////////" + "\n");
-            GetListItems("int.example", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1", "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", 2L);
+            ////Using test Guid : You have to replace them by yours.
+            //GetListItems("52c5dd34-1b5f-460b-8904-6f0f2897f6a1");
+            //Console.WriteLine("/////////////////////////////////////////////////////////");
+            //Console.WriteLine("/////////////////////////////////////////////////////////");
+            //Console.WriteLine("/////////////////////////////////////////////////////////" + "\n");
+            //GetListItems("int.example", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1", "a1bb19bd-a24a-4443-8728-a6ad80eb42b8");
+            //Console.WriteLine("/////////////////////////////////////////////////////////");
+            //Console.WriteLine("/////////////////////////////////////////////////////////");
+            //Console.WriteLine("/////////////////////////////////////////////////////////" + "\n");
+            //GetListItems("int.example", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1", "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", 2L);
+            var client = new ApiClient("https://quill.colectica.org");
+            var config = new Configuration(client);
+            config.DefaultHeader.Add("api_key", "QUILLTEST");
+
+            var api = new RepositoryApi(config);
+            RepositoryInfo response = api.ApiV1RepositoryInfoGet();
+            Console.WriteLine(response.ToJson());
             Console.ReadLine();
         }
 
@@ -169,11 +176,11 @@ namespace CallAPI
         /// </summary>
         private static Configuration GetClientConfig()
         {
-            var client = new ApiClient("http://localhost:5000");
+            var client = new ApiClient("http://quill.colectica.org/");
 
             var configuration = new Configuration(client);
-            configuration.ApiKey.Add("api_key", "ADMINKEY");
-            configuration.AddDefaultHeader("api_key", "ADMINKEY");
+            configuration.ApiKey.Add("api_key", "QUILLTEST");
+            configuration.AddDefaultHeader("api_key", "QUILLTEST");
             return configuration;
 
         }
