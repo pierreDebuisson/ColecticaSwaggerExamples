@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/pierre/wp2/okhttp-2.7.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pierre/wp2/okio-1.13.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pierre/wp2/swagger.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pierre/Documents/Visual Studio 2017/Projects/Git/ColecticaSwaggerExamples/Java/json-20170516.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
