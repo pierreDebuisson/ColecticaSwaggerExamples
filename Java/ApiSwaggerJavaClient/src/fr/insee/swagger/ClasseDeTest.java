@@ -16,11 +16,14 @@ import javax.security.cert.Certificate;
 
 import io.swagger.client.*;
 import io.swagger.client.api.ItemApi;
+import io.swagger.client.api.QueryApi;
 import io.swagger.client.api.SetApi;
 import io.swagger.client.model.GetLatestItemsRequest;
 import io.swagger.client.model.IdentifierInRequest;
 import io.swagger.client.model.IdentifierTriple;
 import io.swagger.client.model.RepositoryItem;
+import io.swagger.client.model.SearchTypedSetRequest;
+import io.swagger.client.model.SetSearchFacet;
 import io.swagger.client.model.TypedIdTriple;
 
 import com.google.gson.*;
@@ -39,10 +42,7 @@ public class ClasseDeTest {
 	private static Configuration configuration;
 
 	public static void main(String[] args) throws IOException {
-		
-		
 
-		 
 		try {
 			configuration = getConfiguration();
 			System.out.println("TEST de la méthode par itemType :");
@@ -53,12 +53,15 @@ public class ClasseDeTest {
 			// TODO: Remplacer les valeurs
 			System.out.println(
 					getListItemsByAgencyByParentIdByVersion("int.example", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1", 1L));
+			// Test de la méthode POST
 
+			System.out.println("TEST de la méthode getSets Par Type et Objet Parent :");
+			System.out.println(getSetsByItemType("52c5dd34-1b5f-460b-8904-6f0f2897f6a1",
+					"a1bb19bd-a24a-4443-8728-a6ad80eb42b8", "int.example", 1L));
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-		 
 
 	}
 
@@ -70,13 +73,15 @@ public class ClasseDeTest {
 	 */
 	private static Configuration getConfiguration() throws IOException {
 		// TODO: Mettre la configuration Hermes
-		client.setBasePath("https://quill.colectica.org/");
-		configuration = new Configuration();
-		client.setApiKey("QUILLTEST");
-		client.addDefaultHeader("api_key", "QUILLTEST");
-		
-		
-		
+		 client.setBasePath("https://quill.colectica.org/");
+		 configuration = new Configuration();
+		 client.setApiKey("QUILLTEST");
+		 client.addDefaultHeader("api_key", "QUILLTEST");
+
+//		client.setBasePath("http://localhost:5000");
+//		configuration = new Configuration();
+//		client.setApiKey("ADMINKEY");
+//		client.addDefaultHeader("api_key", "ADMINKEY");
 
 		configuration.setDefaultApiClient(client);
 		return configuration;
@@ -96,13 +101,13 @@ public class ClasseDeTest {
 	 * @throws ApiException
 	 * @version 1.0
 	 */
-	private static String getListItemsByAgencyByParentIdByVersion(String agency, String parentID, Long version)
+	private static String getListItemsByAgencyByParentIdByVersion(String agencyId, String parentID, Long version)
 			throws ApiException {
 
 		SetApi instanceSets = new SetApi(client);
 		UUID guidParent = UUID.fromString(parentID);
 
-		List<IdentifierTriple> responseSets = instanceSets.apiV1SetByAgencyByIdByVersionGet(agency, guidParent,
+		List<IdentifierTriple> responseSets = instanceSets.apiV1SetByAgencyByIdByVersionGet(agencyId, guidParent,
 				version);
 
 		// GET the list of GUID
@@ -125,7 +130,7 @@ public class ClasseDeTest {
 		StringBuilder strBuild = new StringBuilder();
 		Gson gson;
 		for (RepositoryItem item : responseList) {
-			if (item != null && agency.equals(item.getAgencyId())) {
+			if (item != null && agencyId.equals(item.getAgencyId())) {
 				gson = new Gson();
 				strBuild.append(gson.toJson(item));
 				strBuild.append("\n");
@@ -154,7 +159,7 @@ public class ClasseDeTest {
 	 * @throws ApiException
 	 * @version 1.0
 	 */
-	private static String getListItemsByAgencyByParentIdByItemType(String agency, String parentID, String itemType,
+	private static String getListItemsByAgencyByParentIdByItemType(String agencyId, String parentID, String itemType,
 			Long version) throws ApiException {
 		// Converting string parameter to GUID
 		UUID itemTypeGuid = UUID.fromString(itemType);
@@ -166,7 +171,7 @@ public class ClasseDeTest {
 		SetApi instanceSets = new SetApi(client);
 		UUID guidParent = UUID.fromString(parentID);
 
-		List<TypedIdTriple> responseSets = instanceSets.apiV1SetByAgencyByIdByVersionTypedGet(agency, guidParent,
+		List<TypedIdTriple> responseSets = instanceSets.apiV1SetByAgencyByIdByVersionTypedGet(agencyId, guidParent,
 				version);
 
 		// GET the list of GUID
@@ -192,9 +197,49 @@ public class ClasseDeTest {
 		StringBuilder strBuild = new StringBuilder();
 		Gson gson;
 		for (RepositoryItem item : responseList) {
-			if (item != null && agency.equals(item.getAgencyId())) {
+			if (item != null && agencyId.equals(item.getAgencyId())) {
 				gson = new Gson();
 				strBuild.append(gson.toJson(item));
+				strBuild.append("\n");
+			}
+			// // Cas de l'exception : à gérer proprement
+			else {
+				// // throw new Exception
+			}
+		}
+		return strBuild.toString();
+	}
+
+	private static String getSetsByItemType(String parentID, String itemType, String agencyId, Long version)
+			throws ApiException {
+
+		// Récupère les infos du repository
+		// RepositoryApi instanceRepository = new RepositoryApi(client);
+		// RepositoryInfo repositoryInfo =
+		// instanceRepository.apiV1RepositoryInfoGet();
+		QueryApi instanceQuery = new QueryApi(client);
+
+		IdentifierInRequest identifier = new IdentifierInRequest();
+		identifier.setIdentifier(UUID.fromString(parentID));
+		identifier.setAgencyId(agencyId);
+		identifier.setVersion(version);
+		SearchTypedSetRequest searchRequest = new SearchTypedSetRequest();
+		searchRequest.setRootItem(identifier);
+		SetSearchFacet facet = new SetSearchFacet();
+		List<UUID> typeList = new ArrayList<UUID>();
+		typeList.add(UUID.fromString(itemType));
+		facet.setItemTypes(typeList);
+		searchRequest.setFacet(facet);
+		List<TypedIdTriple> responseQuery = instanceQuery.apiV1QuerySetPost(searchRequest);
+
+		StringBuilder strBuild = new StringBuilder();
+		Gson gson;
+		for (TypedIdTriple set : responseQuery) {
+			// Comparaison avec le nom de l'entreprise de l'IdentifierTriple
+			if (set != null && agencyId.equals(set.getItem1().getItem3())) {
+				//TODO : afficher szulement iTem1 + remplacement de Item1,2,3 par attributs
+				gson = new Gson();
+				strBuild.append(gson.toJson(set));
 				strBuild.append("\n");
 			}
 			// // Cas de l'exception : à gérer proprement
