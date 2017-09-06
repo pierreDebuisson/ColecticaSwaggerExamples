@@ -4,16 +4,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 public class ClasseDeTestURL {
 	// TODO: Mettre la configuration appropriée
@@ -27,6 +32,8 @@ public class ClasseDeTestURL {
 
 		List<Identifier> ids = getSetsByAgencyIdVersion(agency, idParent, version);
 		getListItemsByIdentifiers(ids);
+		System.out.println("Test de la méthode GET Sets by Type :");
+		getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
 
 	}
 
@@ -118,7 +125,67 @@ public class ClasseDeTestURL {
 			System.out.println(conn.getResponseMessage());
 		}
 	}
-	
-	
+
+	public static void getSetsByItemType(String parentID, String itemType, String agencyId, String version)
+			throws IOException {
+		String httpsURL = basePath + "/api/v1/_query" + "?api_key=" + apiKey;
+		URL myUrl = new URL(httpsURL);
+		HttpURLConnection conn = null;
+		if (myUrl.toString().contains("https")) {
+			// TODO: Décommenter pour utiliser le HTTPS
+			// HttpsURLConnection conn = (HttpsURLConnection)
+			// myUrl.openConnection();
+
+		} else {
+			conn = (HttpURLConnection) myUrl.openConnection();
+
+		}
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestMethod("POST");
+
+		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+		//Renseignement de l'ItemType
+		HashMap<String, String> ids = new HashMap<String, String>();
+		ids.put("", itemType);
+
+		JSONObject jsonArray = new JSONObject();
+		String str;
+
+		jsonArray.put("ItemTypes", ids.values());
+		//Renseignement de l'agencyId, Version et id du rootItem
+		ids = new HashMap<String, String>();
+		ids.put("AgencyId", agencyId);
+		ids.put("Identifier", parentID);
+		ids.put("Version", version);
+		List<Map<String, String>> array = new ArrayList<Map<String, String>>();
+		array.add(ids);
+		//Ajout des propriétés requises (une correction sera effective sur la V2
+		jsonArray.put("SearchSets", array.toArray());
+		jsonArray.put("Cultures", new ArrayList<>());
+		jsonArray.put("LanguageSortOrder", new ArrayList<>());
+		jsonArray.put("SearchTerms", new ArrayList<>());
+		jsonArray.put("SearchTargets", new ArrayList<>());
+		str = jsonArray.toString();
+
+		System.out.println(jsonArray);
+		wr.write(str);
+		wr.flush();
+		StringBuilder sb = new StringBuilder();
+		int HttpResult = conn.getResponseCode();
+		if (HttpResult == HttpURLConnection.HTTP_OK) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			br.close();
+			System.out.println(sb.toString());
+		} else {
+			System.out.println(conn.getResponseMessage());
+		}
+	}
 
 }
