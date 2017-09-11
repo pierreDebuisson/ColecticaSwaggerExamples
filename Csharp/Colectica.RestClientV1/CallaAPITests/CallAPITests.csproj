@@ -100,9 +100,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.6.1\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\..\..\source\repos\AutoRestApi\AutoRestApi\AutoRestApi.csproj">
       <Project>{27daa67e-81e0-401f-92c2-8394f12fc09c}</Project>
       <Name>AutoRestApi</Name>

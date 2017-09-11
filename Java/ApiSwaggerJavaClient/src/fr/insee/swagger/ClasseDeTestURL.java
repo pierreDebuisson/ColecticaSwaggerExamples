@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -34,9 +37,19 @@ public class ClasseDeTestURL {
 		getListItemsByIdentifiers(ids);
 		System.out.println("Test de la méthode GET Sets by Type :");
 		getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
+		NewEvent();
+		NewItem();
 
 	}
-
+	
+	/**
+	 * Méthode de retour des Sets du repository
+	 * @param agency
+	 * @param idParent
+	 * @param version
+	 * @return
+	 * @throws IOException
+	 */
 	public static List<Identifier> getSetsByAgencyIdVersion(String agency, String idParent, String version)
 			throws IOException {
 		String httpsURL = basePath + "/api/v1/set/" + agency + "/" + idParent + "/" + version + "?api_key=" + apiKey;
@@ -78,7 +91,15 @@ public class ClasseDeTestURL {
 		return identifiers;
 
 	}
-
+	
+	/**
+	 * Méthode de retour de la liste des Items du repository selon les Identifiers de la requête
+	 * @param agency
+	 * @param idParent
+	 * @param version
+	 * @return
+	 * @throws IOException
+	 */
 	public static void getListItemsByIdentifiers(List<Identifier> identifiers) throws IOException {
 		String httpsURL = basePath + "/api/v1/item/_getListLatest" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
@@ -125,8 +146,15 @@ public class ClasseDeTestURL {
 			System.out.println(conn.getResponseMessage());
 		}
 	}
-
-	public static void getSetsByItemType(String parentID, String itemType, String agencyId, String version)
+	/**
+	 * Méthode de retour de la liste des Items du repository pour un type spécifique
+	 * @param parentID
+	 * @param itemType
+	 * @param agencyId
+	 * @param version
+	 * @throws IOException
+	 */
+	public static String getSetsByItemType(String parentID, String itemType, String agencyId, String version)
 			throws IOException {
 		String httpsURL = basePath + "/api/v1/_query" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
@@ -184,8 +212,102 @@ public class ClasseDeTestURL {
 			br.close();
 			System.out.println(sb.toString());
 		} else {
+			str = conn.getResponseMessage();
+		}
+		return str;
+	}
+	
+	/**
+	 * Méthode création d'un évenement (logger)dans le repository
+	 */
+	public static void NewEvent() throws IOException
+	{
+		String httpsURL = basePath + "/api/v1/event" + "?api_key=" + apiKey;
+		URL myUrl = new URL(httpsURL);
+		HttpURLConnection conn = null;
+		if (myUrl.toString().contains("https")) {
+			// TODO: Décommenter pour utiliser le HTTPS
+			// HttpsURLConnection conn = (HttpsURLConnection)
+			// myUrl.openConnection();
+
+		} else {
+			conn = (HttpURLConnection) myUrl.openConnection();
+
+		}
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestMethod("POST");
+
+		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+		JSONObject jsonObject,values;
+		jsonObject = new JSONObject();
+		//TODO: remplacer par DateTime.now();
+		jsonObject.put("logged", "2017-09-11T13:53:23.863Z");
+		jsonObject.put("Application", "colectica.portal");
+		jsonObject.put("Level", "1");
+		jsonObject.put("Number", "2");
+		jsonObject.put("Version", "1");
+		jsonObject.put("Username", "anonymous");
+		jsonObject.put("EventData", "test");
+		jsonObject.put("ItemId", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1");
+		jsonObject.put("ItemAgencyId", "int.example");
+		jsonObject.put("ItemVersion", "1");
+		
+		
+		System.out.println(jsonObject);
+		String str = jsonObject.toString();
+		wr.write(str);
+		wr.flush();
+		StringBuilder sb = new StringBuilder();
+		int HttpResult = conn.getResponseCode();
+		if (HttpResult == HttpURLConnection.HTTP_OK) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			br.close();
+			System.out.println(sb.toString());
+		} else {
 			System.out.println(conn.getResponseMessage());
 		}
+
+	}
+	
+	public static void NewItem() throws IOException
+	{
+		String httpsURL = basePath + "/api/v1/item" + "?api_key=" + apiKey;
+		URL myUrl = new URL(httpsURL);
+		HttpURLConnection conn = null;
+		if (myUrl.toString().contains("https")) {
+			// TODO: Décommenter pour utiliser le HTTPS
+			// HttpsURLConnection conn = (HttpsURLConnection)
+			// myUrl.openConnection();
+
+		} else {
+			conn = (HttpURLConnection) myUrl.openConnection();
+
+		}
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestMethod("POST");
+
+		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+		JSONObject jsonObject,values;
+		jsonObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		values = new JSONObject();
+		jsonObject.append("Items", values);
+		String str = jsonObject.toString();
+		
+		System.out.println(jsonObject);
+		
+		
+
 	}
 
 }

@@ -8,9 +8,9 @@ namespace CallAPITests.Api
 {
     public class ConfigTest
     {
-        public string BasePath { get; set; } = "https://quill.colectica.org/";
+        public string BasePath { get; set; } = "http://localhost:5000";
         public string ApiKeyPrefix { get; set; } = "api_key";
-        public string ApiKey { get; set; } = "QUILLTEST";
+        public string ApiKey { get; set; } = "ADMINKEY";
         
     }
 }
