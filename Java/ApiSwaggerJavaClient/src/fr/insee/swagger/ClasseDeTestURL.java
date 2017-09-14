@@ -4,53 +4,47 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
 import javax.net.ssl.HttpsURLConnection;
-
-import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 public class ClasseDeTestURL {
 	// TODO: Mettre la configuration appropriée
-	private static String basePath = "http://localhost:5000";
-	private static String apiKey = "ADMINKEY";
+	private String basePath = "http://localhost:5000";
+	private String apiKey = "ADMINKEY";
 
 	public static void main(String[] args) throws IOException {
 		String agency = "int.example";
 		String version = "1";
 		String idParent = "52c5dd34-1b5f-460b-8904-6f0f2897f6a1";
-
-		List<Identifier> ids = getSetsByAgencyIdVersion(agency, idParent, version);
-		getListItemsByIdentifiers(ids);
+		ClasseDeTestURL tests = new ClasseDeTestURL();
+		List<Identifier> ids = tests.getSetsByAgencyIdVersion(agency, idParent, version);
+		tests.getListItemsByIdentifiers(ids);
 		System.out.println("Test de la méthode GET Sets by Type :");
-		getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
-		NewEvent();
-		NewItem();
+		tests.getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
+		tests.NewEvent();																										//TODO: construire le fragment XML
+		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", Long.valueOf(version), "f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16", "fragmentXML", "1", "test",
+				true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
 
 	}
-	
+
 	/**
 	 * Méthode de retour des Sets du repository
+	 * 
 	 * @param agency
 	 * @param idParent
 	 * @param version
 	 * @return
 	 * @throws IOException
 	 */
-	public static List<Identifier> getSetsByAgencyIdVersion(String agency, String idParent, String version)
+	private List<Identifier> getSetsByAgencyIdVersion(String agency, String idParent, String version)
 			throws IOException {
 		String httpsURL = basePath + "/api/v1/set/" + agency + "/" + idParent + "/" + version + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
@@ -91,16 +85,18 @@ public class ClasseDeTestURL {
 		return identifiers;
 
 	}
-	
+
 	/**
-	 * Méthode de retour de la liste des Items du repository selon les Identifiers de la requête
+	 * Méthode de retour de la liste des Items du repository selon les
+	 * Identifiers de la requête
+	 * 
 	 * @param agency
 	 * @param idParent
 	 * @param version
 	 * @return
 	 * @throws IOException
 	 */
-	public static void getListItemsByIdentifiers(List<Identifier> identifiers) throws IOException {
+	private void getListItemsByIdentifiers(List<Identifier> identifiers) throws IOException {
 		String httpsURL = basePath + "/api/v1/item/_getListLatest" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
@@ -146,15 +142,18 @@ public class ClasseDeTestURL {
 			System.out.println(conn.getResponseMessage());
 		}
 	}
+
 	/**
-	 * Méthode de retour de la liste des Items du repository pour un type spécifique
+	 * Méthode de retour de la liste des Items du repository pour un type
+	 * spécifique
+	 * 
 	 * @param parentID
 	 * @param itemType
 	 * @param agencyId
 	 * @param version
 	 * @throws IOException
 	 */
-	public static String getSetsByItemType(String parentID, String itemType, String agencyId, String version)
+	private String getSetsByItemType(String parentID, String itemType, String agencyId, String version)
 			throws IOException {
 		String httpsURL = basePath + "/api/v1/_query" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
@@ -175,7 +174,7 @@ public class ClasseDeTestURL {
 		conn.setRequestMethod("POST");
 
 		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-		//Renseignement de l'ItemType
+		// Renseignement de l'ItemType
 		HashMap<String, String> ids = new HashMap<String, String>();
 		ids.put("", itemType);
 
@@ -183,14 +182,15 @@ public class ClasseDeTestURL {
 		String str;
 
 		jsonArray.put("ItemTypes", ids.values());
-		//Renseignement de l'agencyId, Version et id du rootItem
+		// Renseignement de l'agencyId, Version et id du rootItem
 		ids = new HashMap<String, String>();
 		ids.put("AgencyId", agencyId);
 		ids.put("Identifier", parentID);
 		ids.put("Version", version);
 		List<Map<String, String>> array = new ArrayList<Map<String, String>>();
 		array.add(ids);
-		//Ajout des propriétés requises (une correction sera effective sur la V2
+		// Ajout des propriétés requises (une correction sera effective sur la
+		// V2
 		jsonArray.put("SearchSets", array.toArray());
 		jsonArray.put("Cultures", new ArrayList<>());
 		jsonArray.put("LanguageSortOrder", new ArrayList<>());
@@ -216,12 +216,11 @@ public class ClasseDeTestURL {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * Méthode création d'un évenement (logger)dans le repository
 	 */
-	public static void NewEvent() throws IOException
-	{
+	private void NewEvent() throws IOException {
 		String httpsURL = basePath + "/api/v1/event" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
@@ -241,9 +240,9 @@ public class ClasseDeTestURL {
 		conn.setRequestMethod("POST");
 
 		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-		JSONObject jsonObject,values;
+		JSONObject jsonObject;
 		jsonObject = new JSONObject();
-		//TODO: remplacer par DateTime.now();
+		// TODO: remplacer par DateTime.now();
 		jsonObject.put("logged", "2017-09-11T13:53:23.863Z");
 		jsonObject.put("Application", "colectica.portal");
 		jsonObject.put("Level", "1");
@@ -254,8 +253,7 @@ public class ClasseDeTestURL {
 		jsonObject.put("ItemId", "52c5dd34-1b5f-460b-8904-6f0f2897f6a1");
 		jsonObject.put("ItemAgencyId", "int.example");
 		jsonObject.put("ItemVersion", "1");
-		
-		
+
 		System.out.println(jsonObject);
 		String str = jsonObject.toString();
 		wr.write(str);
@@ -275,9 +273,40 @@ public class ClasseDeTestURL {
 		}
 
 	}
-	
-	public static void NewItem() throws IOException
-	{
+
+	// {
+	// "Items": [
+	// {
+	// "ItemType": "7E47C269-BCAB-40F7-A778-AF7BBC4E3D00",
+	// "AgencyId": "int.example",
+	// "Version": 0,
+	// "Identifier": "f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16",
+	// "Item": "<Fragment xmlns:r=\"ddi:reusable:3_2\"
+	// xmlns=\"ddi:instance:3_2\"> <Category isUniversallyUnique=\"true\"
+	// versionDate=\"2015-11-16T21:18:04.5513144Z\" isMissing=\"false\"
+	// xmlns=\"ddi:logicalproduct:3_2\">
+	// <r:URN>urn:ddi:int.example:f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16:1</r:URN>
+	// <r:Agency>int.example</r:Agency>
+	// <r:ID>f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16</r:ID>
+	// <r:Version>1</r:Version>
+	// <r:VersionResponsibility>test</r:VersionResponsibility> <r:Label>
+	// <r:Content xml:lang=\"en-US\">Sample Category</r:Content> </r:Label>
+	// </Category> </Fragment>",
+	// "Notes": [],
+	// "VersionDate": "2017-09-11",
+	// "VersionResponsibility": "test",
+	// "IsPublished": true,
+	// "IsDeprecated": false,
+	// "IsProvisional": false,
+	// "ItemFormat": "c0ca1bd4-1839-4233-a5b5-906da0302b89"
+	// }
+	// ],
+	// "Options": {
+	// }
+	// }
+	private void NewItem(String itemType, String agencyId, Long version, String identifier, String XMLFragementItem,
+			String versionDate, String versionResponsibility, boolean isPublished, Boolean isDeprecated,
+			Boolean isProvisional, String itemFormat) throws IOException {
 		String httpsURL = basePath + "/api/v1/item" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
@@ -297,16 +326,26 @@ public class ClasseDeTestURL {
 		conn.setRequestMethod("POST");
 
 		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-		JSONObject jsonObject,values;
+		JSONObject jsonObject, values;
 		jsonObject = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
 		values = new JSONObject();
+		values.put("ItemType", itemType);
+		values.put("AgencyId", agencyId);
+		values.put("Version", version);
+		values.put("Identifier", identifier);
+		values.put("Item", XMLFragementItem);
+		values.put("Notes", "[]");
+		values.put("VersionDate", versionDate);
+		values.put("VersionResponsibility", versionResponsibility);
+		values.put("IsPublished", isPublished);
+		values.put("IsDeprecated", isDeprecated);
+		values.put("IsProvisional", isProvisional);
+		values.put("ItemFormat", itemFormat);
 		jsonObject.append("Items", values);
 		String str = jsonObject.toString();
-		
+
 		System.out.println(jsonObject);
-		
-		
 
 	}
 
