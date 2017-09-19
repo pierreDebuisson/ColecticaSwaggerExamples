@@ -15,6 +15,8 @@ import java.util.UUID;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.XML;
+
 import com.google.gson.Gson;
 
 public class ClasseDeTestURL {
@@ -31,8 +33,11 @@ public class ClasseDeTestURL {
 		tests.getListItemsByIdentifiers(ids);
 		System.out.println("Test de la méthode GET Sets by Type :");
 		tests.getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
-		tests.NewEvent();																										//TODO: construire le fragment XML
-		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", Long.valueOf(version), "fragmentXML", "1", "test",
+		tests.NewEvent();
+		
+		String fragment = "<Fragment xmlns:r=\"ddi:reusable:3_2\" xmlns=\"ddi:instance:3_2\"> <Category isUniversallyUnique=\"true\" versionDate=\"2015-11-16T21:18:04.5513144Z\" isMissing=\"false\" xmlns=\"ddi:logicalproduct:3_2\"> <r:URN>urn:ddi:int.example:f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16:1</r:URN> <r:Agency>int.example</r:Agency> <r:ID>f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16</r:ID> <r:Version>1</r:Version> <r:VersionResponsibility>test</r:VersionResponsibility> <r:Label> <r:Content xml:lang=\"en-US\">Sample Category</r:Content> </r:Label> </Category> </Fragment>";
+		
+		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", 0L,fragment,  "2017-09-11", "test",
 				true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
 
 	}
@@ -337,7 +342,7 @@ public class ClasseDeTestURL {
 		values.put("Version", version);
 		values.put("Identifier", UUID.randomUUID().toString());
 		values.put("Item", XMLFragementItem);
-		values.put("Notes", "[]");
+		values.put("Notes", new ArrayList<>());
 		values.put("VersionDate", versionDate);
 		values.put("VersionResponsibility", versionResponsibility);
 		values.put("IsPublished", isPublished);
@@ -349,22 +354,21 @@ public class ClasseDeTestURL {
 
 		System.out.println(jsonObject);
 		
-		
-//		wr.write(str);
-//		wr.flush();
-//		StringBuilder sb = new StringBuilder();
-//		int HttpResult = conn.getResponseCode();
-//		if (HttpResult == HttpURLConnection.HTTP_OK) {
-//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-//			String line = null;
-//			while ((line = br.readLine()) != null) {
-//				sb.append(line + "\n");
-//			}
-//			br.close();
-//			System.out.println(sb.toString());
-//		} else {
-//			System.out.println(conn.getResponseMessage());
-//		}
+		wr.write(str);
+		wr.flush();
+		StringBuilder sb = new StringBuilder();
+		int HttpResult = conn.getResponseCode();
+		if (HttpResult == HttpURLConnection.HTTP_OK) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			br.close();
+			System.out.println(sb.toString());
+		} else {
+			System.out.println(conn.getResponseMessage());
+		}
 
 	}
 
