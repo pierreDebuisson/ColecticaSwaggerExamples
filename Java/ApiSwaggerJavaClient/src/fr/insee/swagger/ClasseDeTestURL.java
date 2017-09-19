@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 
 public class ClasseDeTestURL {
-	// TODO: Mettre la configuration appropriée
+	// TODO: Mettre la configuration appropriï¿½e
 	private String basePath = "http://localhost:5000";
 	private String apiKey = "ADMINKEY";
 
@@ -27,16 +27,16 @@ public class ClasseDeTestURL {
 		ClasseDeTestURL tests = new ClasseDeTestURL();
 		List<Identifier> ids = tests.getSetsByAgencyIdVersion(agency, idParent, version);
 		tests.getListItemsByIdentifiers(ids);
-		System.out.println("Test de la méthode GET Sets by Type :");
+		System.out.println("Test de la mï¿½thode GET Sets by Type :");
 		tests.getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
 		tests.NewEvent();																										//TODO: construire le fragment XML
-		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", Long.valueOf(version), "f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16", "fragmentXML", "1", "test",
+		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", Long.valueOf(version), UUID.randomUUID().toString(), "fragmentXML", "1", "test",
 				true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
 
 	}
 
 	/**
-	 * Méthode de retour des Sets du repository
+	 * Mï¿½thode de retour des Sets du repository
 	 * 
 	 * @param agency
 	 * @param idParent
@@ -87,8 +87,8 @@ public class ClasseDeTestURL {
 	}
 
 	/**
-	 * Méthode de retour de la liste des Items du repository selon les
-	 * Identifiers de la requête
+	 * Mï¿½thode de retour de la liste des Items du repository selon les
+	 * Identifiers de la requï¿½te
 	 * 
 	 * @param agency
 	 * @param idParent
@@ -101,7 +101,7 @@ public class ClasseDeTestURL {
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Décommenter pour utiliser le HTTPS
+			// TODO: Dï¿½commenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -144,8 +144,8 @@ public class ClasseDeTestURL {
 	}
 
 	/**
-	 * Méthode de retour de la liste des Items du repository pour un type
-	 * spécifique
+	 * Mï¿½thode de retour de la liste des Items du repository pour un type
+	 * spï¿½cifique
 	 * 
 	 * @param parentID
 	 * @param itemType
@@ -159,7 +159,7 @@ public class ClasseDeTestURL {
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Décommenter pour utiliser le HTTPS
+			// TODO: Dï¿½commenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -189,7 +189,7 @@ public class ClasseDeTestURL {
 		ids.put("Version", version);
 		List<Map<String, String>> array = new ArrayList<Map<String, String>>();
 		array.add(ids);
-		// Ajout des propriétés requises (une correction sera effective sur la
+		// Ajout des propriï¿½tï¿½s requises (une correction sera effective sur la
 		// V2
 		jsonArray.put("SearchSets", array.toArray());
 		jsonArray.put("Cultures", new ArrayList<>());
@@ -218,14 +218,14 @@ public class ClasseDeTestURL {
 	}
 
 	/**
-	 * Méthode création d'un évenement (logger)dans le repository
+	 * Mï¿½thode crï¿½ation d'un ï¿½venement (logger)dans le repository
 	 */
 	private void NewEvent() throws IOException {
 		String httpsURL = basePath + "/api/v1/event" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Décommenter pour utiliser le HTTPS
+			// TODO: Dï¿½commenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -311,7 +311,7 @@ public class ClasseDeTestURL {
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Décommenter pour utiliser le HTTPS
+			// TODO: Dï¿½commenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
