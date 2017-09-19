@@ -10,13 +10,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.google.gson.Gson;
 
 public class ClasseDeTestURL {
-	// TODO: Mettre la configuration appropriï¿½e
+	// TODO: Mettre la configuration appropriée
 	private String basePath = "http://localhost:5000";
 	private String apiKey = "ADMINKEY";
 
@@ -27,16 +29,16 @@ public class ClasseDeTestURL {
 		ClasseDeTestURL tests = new ClasseDeTestURL();
 		List<Identifier> ids = tests.getSetsByAgencyIdVersion(agency, idParent, version);
 		tests.getListItemsByIdentifiers(ids);
-		System.out.println("Test de la mï¿½thode GET Sets by Type :");
+		System.out.println("Test de la méthode GET Sets by Type :");
 		tests.getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
 		tests.NewEvent();																										//TODO: construire le fragment XML
-		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", Long.valueOf(version), UUID.randomUUID().toString(), "fragmentXML", "1", "test",
+		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", Long.valueOf(version), "fragmentXML", "1", "test",
 				true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
 
 	}
 
 	/**
-	 * Mï¿½thode de retour des Sets du repository
+	 * Méthode de retour des Sets du repository
 	 * 
 	 * @param agency
 	 * @param idParent
@@ -87,8 +89,8 @@ public class ClasseDeTestURL {
 	}
 
 	/**
-	 * Mï¿½thode de retour de la liste des Items du repository selon les
-	 * Identifiers de la requï¿½te
+	 * Méthode de retour de la liste des Items du repository selon les
+	 * Identifiers de la requête
 	 * 
 	 * @param agency
 	 * @param idParent
@@ -101,7 +103,7 @@ public class ClasseDeTestURL {
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Dï¿½commenter pour utiliser le HTTPS
+			// TODO: Décommenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -144,8 +146,8 @@ public class ClasseDeTestURL {
 	}
 
 	/**
-	 * Mï¿½thode de retour de la liste des Items du repository pour un type
-	 * spï¿½cifique
+	 * Méthode de retour de la liste des Items du repository pour un type
+	 * spécifique
 	 * 
 	 * @param parentID
 	 * @param itemType
@@ -159,7 +161,7 @@ public class ClasseDeTestURL {
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Dï¿½commenter pour utiliser le HTTPS
+			// TODO: Décommenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -189,7 +191,7 @@ public class ClasseDeTestURL {
 		ids.put("Version", version);
 		List<Map<String, String>> array = new ArrayList<Map<String, String>>();
 		array.add(ids);
-		// Ajout des propriï¿½tï¿½s requises (une correction sera effective sur la
+		// Ajout des propriétés requises (une correction sera effective sur la
 		// V2
 		jsonArray.put("SearchSets", array.toArray());
 		jsonArray.put("Cultures", new ArrayList<>());
@@ -218,14 +220,14 @@ public class ClasseDeTestURL {
 	}
 
 	/**
-	 * Mï¿½thode crï¿½ation d'un ï¿½venement (logger)dans le repository
+	 * Méthode création d'un évenement (logger)dans le repository
 	 */
 	private void NewEvent() throws IOException {
 		String httpsURL = basePath + "/api/v1/event" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Dï¿½commenter pour utiliser le HTTPS
+			// TODO: Décommenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -304,14 +306,14 @@ public class ClasseDeTestURL {
 	// "Options": {
 	// }
 	// }
-	private void NewItem(String itemType, String agencyId, Long version, String identifier, String XMLFragementItem,
+	private void NewItem(String itemType, String agencyId, Long version, String XMLFragementItem,
 			String versionDate, String versionResponsibility, boolean isPublished, Boolean isDeprecated,
 			Boolean isProvisional, String itemFormat) throws IOException {
 		String httpsURL = basePath + "/api/v1/item" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
 		if (myUrl.toString().contains("https")) {
-			// TODO: Dï¿½commenter pour utiliser le HTTPS
+			// TODO: Décommenter pour utiliser le HTTPS
 			// HttpsURLConnection conn = (HttpsURLConnection)
 			// myUrl.openConnection();
 
@@ -333,7 +335,7 @@ public class ClasseDeTestURL {
 		values.put("ItemType", itemType);
 		values.put("AgencyId", agencyId);
 		values.put("Version", version);
-		values.put("Identifier", identifier);
+		values.put("Identifier", UUID.randomUUID().toString());
 		values.put("Item", XMLFragementItem);
 		values.put("Notes", "[]");
 		values.put("VersionDate", versionDate);
@@ -346,6 +348,23 @@ public class ClasseDeTestURL {
 		String str = jsonObject.toString();
 
 		System.out.println(jsonObject);
+		
+		
+//		wr.write(str);
+//		wr.flush();
+//		StringBuilder sb = new StringBuilder();
+//		int HttpResult = conn.getResponseCode();
+//		if (HttpResult == HttpURLConnection.HTTP_OK) {
+//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+//			String line = null;
+//			while ((line = br.readLine()) != null) {
+//				sb.append(line + "\n");
+//			}
+//			br.close();
+//			System.out.println(sb.toString());
+//		} else {
+//			System.out.println(conn.getResponseMessage());
+//		}
 
 	}
 
