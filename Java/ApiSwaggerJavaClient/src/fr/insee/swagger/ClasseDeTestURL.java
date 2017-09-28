@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,21 +26,31 @@ public class ClasseDeTestURL {
 	private String apiKey = "ADMINKEY";
 
 	public static void main(String[] args) throws IOException {
+
+		// local attributes
 		String agency = "int.example";
 		String version = "1";
 		String idParent = "52c5dd34-1b5f-460b-8904-6f0f2897f6a1";
 		ClasseDeTestURL tests = new ClasseDeTestURL();
 		List<Identifier> ids = tests.getSetsByAgencyIdVersion(agency, idParent, version);
+
+		// Lecture
 		tests.getListItemsByIdentifiers(ids);
 		System.out.println("Test de la méthode GET Sets by Type :");
 		tests.getSetsByItemType(idParent, "a1bb19bd-a24a-4443-8728-a6ad80eb42b8", agency, version);
-		tests.NewEvent();
-		
-		String fragment = "<Fragment xmlns:r=\"ddi:reusable:3_2\" xmlns=\"ddi:instance:3_2\"> <Category isUniversallyUnique=\"true\" versionDate=\"2015-11-16T21:18:04.5513144Z\" isMissing=\"false\" xmlns=\"ddi:logicalproduct:3_2\"> <r:URN>urn:ddi:int.example:f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16:1</r:URN> <r:Agency>int.example</r:Agency> <r:ID>f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16</r:ID> <r:Version>1</r:Version> <r:VersionResponsibility>test</r:VersionResponsibility> <r:Label> <r:Content xml:lang=\"en-US\">Sample Category</r:Content> </r:Label> </Category> </Fragment>";
-		
-		tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", 0L,fragment,  "2017-09-11", "test",
-				true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
 
+		// Ecriture
+		tests.NewEvent();
+		String fragment = "<Fragment xmlns:r=\"ddi:reusable:3_2\" xmlns=\"ddi:instance:3_2\"> <Category isUniversallyUnique=\"true\" versionDate=\"2015-11-16T21:18:04.5513144Z\" isMissing=\"false\" xmlns=\"ddi:logicalproduct:3_2\"> <r:URN>urn:ddi:int.example:f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16:1</r:URN> <r:Agency>int.example</r:Agency> <r:ID>f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16</r:ID> <r:Version>1</r:Version> <r:VersionResponsibility>test</r:VersionResponsibility> <r:Label> <r:Content xml:lang=\"en-US\">Sample Category</r:Content> </r:Label> </Category> </Fragment>";
+		String uuidNewItem = tests.NewItem("7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", fragment,
+				"2017-09-11", "test", true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
+		System.out.println("UUID of the NewItem: " + uuidNewItem);
+		long latestVersion = tests.getVersionItem(agency, uuidNewItem);
+		latestVersion++;
+		tests.updateItem(uuidNewItem, "7E47C269-BCAB-40F7-A778-AF7BBC4E3D00", "int.example", latestVersion, fragment,
+				"2017-09-12", "test", true, false, false, "c0ca1bd4-1839-4233-a5b5-906da0302b89");
+		System.out.println("Date updated for the item: " + uuidNewItem);
+		latestVersion = tests.getVersionItem(agency, uuidNewItem);
 	}
 
 	/**
@@ -76,7 +87,6 @@ public class ClasseDeTestURL {
 		while ((inputLine = br.readLine()) != null) {
 			System.out.println(inputLine);
 			gson = new Gson();
-
 			jsonArray = new JSONArray(inputLine);
 
 			for (Object object : jsonArray) {
@@ -281,39 +291,104 @@ public class ClasseDeTestURL {
 
 	}
 
-	// {
-	// "Items": [
-	// {
-	// "ItemType": "7E47C269-BCAB-40F7-A778-AF7BBC4E3D00",
-	// "AgencyId": "int.example",
-	// "Version": 0,
-	// "Identifier": "f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16",
-	// "Item": "<Fragment xmlns:r=\"ddi:reusable:3_2\"
-	// xmlns=\"ddi:instance:3_2\"> <Category isUniversallyUnique=\"true\"
-	// versionDate=\"2015-11-16T21:18:04.5513144Z\" isMissing=\"false\"
-	// xmlns=\"ddi:logicalproduct:3_2\">
-	// <r:URN>urn:ddi:int.example:f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16:1</r:URN>
-	// <r:Agency>int.example</r:Agency>
-	// <r:ID>f1e672e3-2c5d-4c4c-b9d5-a18fc4d1bc16</r:ID>
-	// <r:Version>1</r:Version>
-	// <r:VersionResponsibility>test</r:VersionResponsibility> <r:Label>
-	// <r:Content xml:lang=\"en-US\">Sample Category</r:Content> </r:Label>
-	// </Category> </Fragment>",
-	// "Notes": [],
-	// "VersionDate": "2017-09-11",
-	// "VersionResponsibility": "test",
-	// "IsPublished": true,
-	// "IsDeprecated": false,
-	// "IsProvisional": false,
-	// "ItemFormat": "c0ca1bd4-1839-4233-a5b5-906da0302b89"
-	// }
-	// ],
-	// "Options": {
-	// }
-	// }
-	private void NewItem(String itemType, String agencyId, Long version, String XMLFragementItem,
+	/**
+	 * Crée un nouvel Item
+	 * 
+	 * @param itemType
+	 * @param agencyId
+	 * @param XMLFragementItem
+	 * @param versionDate
+	 * @param versionResponsibility
+	 * @param isPublished
+	 * @param isDeprecated
+	 * @param isProvisional
+	 * @param itemFormat
+	 * @return
+	 * @throws IOException
+	 */
+	private String NewItem(String itemType, String agencyId, String XMLFragementItem, String versionDate,
+			String versionResponsibility, boolean isPublished, Boolean isDeprecated, Boolean isProvisional,
+			String itemFormat) throws IOException {
+		String httpsURL = basePath + "/api/v1/item" + "?api_key=" + apiKey;
+		URL myUrl = new URL(httpsURL);
+		HttpURLConnection conn = null;
+		if (myUrl.toString().contains("https")) {
+			// TODO: Décommenter pour utiliser le HTTPS
+			// HttpsURLConnection conn = (HttpsURLConnection)
+			// myUrl.openConnection();
+
+		} else {
+			conn = (HttpURLConnection) myUrl.openConnection();
+
+		}
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestProperty("Content-Type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestMethod("POST");
+
+		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+		JSONObject jsonObject, values;
+		jsonObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		values = new JSONObject();
+		values.put("ItemType", itemType);
+		values.put("AgencyId", agencyId);
+		values.put("Version", 1L);
+		String newUuid = UUID.randomUUID().toString();
+		values.put("Identifier", newUuid);
+		values.put("Item", XMLFragementItem);
+		values.put("Notes", new ArrayList<>());
+		values.put("VersionDate", versionDate);
+		values.put("VersionResponsibility", versionResponsibility);
+		values.put("IsPublished", isPublished);
+		values.put("IsDeprecated", isDeprecated);
+		values.put("IsProvisional", isProvisional);
+		values.put("ItemFormat", itemFormat);
+		jsonObject.append("Items", values);
+		String str = jsonObject.toString();
+
+		System.out.println(jsonObject);
+
+		wr.write(str);
+		wr.flush();
+		StringBuilder sb = new StringBuilder();
+		int HttpResult = conn.getResponseCode();
+		if (HttpResult == HttpURLConnection.HTTP_OK) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			br.close();
+			System.out.println(sb.toString());
+		} else {
+			System.out.println(conn.getResponseMessage());
+		}
+		return newUuid;
+
+	}
+
+	/**
+	 * Met a jour l'Item spécifié en paramètre (UUID).
+	 * 
+	 * @param UUID
+	 * @param itemType
+	 * @param agencyId
+	 * @param version
+	 * @param XMLFragementItem
+	 * @param versionDate
+	 * @param versionResponsibility
+	 * @param isPublished
+	 * @param isDeprecated
+	 * @param isProvisional
+	 * @param itemFormat
+	 * @throws IOException
+	 */
+	private void updateItem(String UUID, String itemType, String agencyId, Long version, String XMLFragementItem,
 			String versionDate, String versionResponsibility, boolean isPublished, Boolean isDeprecated,
 			Boolean isProvisional, String itemFormat) throws IOException {
+
 		String httpsURL = basePath + "/api/v1/item" + "?api_key=" + apiKey;
 		URL myUrl = new URL(httpsURL);
 		HttpURLConnection conn = null;
@@ -340,7 +415,7 @@ public class ClasseDeTestURL {
 		values.put("ItemType", itemType);
 		values.put("AgencyId", agencyId);
 		values.put("Version", version);
-		values.put("Identifier", UUID.randomUUID().toString());
+		values.put("Identifier", UUID);
 		values.put("Item", XMLFragementItem);
 		values.put("Notes", new ArrayList<>());
 		values.put("VersionDate", versionDate);
@@ -353,7 +428,7 @@ public class ClasseDeTestURL {
 		String str = jsonObject.toString();
 
 		System.out.println(jsonObject);
-		
+
 		wr.write(str);
 		wr.flush();
 		StringBuilder sb = new StringBuilder();
@@ -369,6 +444,41 @@ public class ClasseDeTestURL {
 		} else {
 			System.out.println(conn.getResponseMessage());
 		}
+
+	}
+
+	/**
+	 * retourne le numero de la dernière version d'un Item
+	 * 
+	 * @param agency
+	 * @param id
+	 * @return numberLastVersion
+	 * @throws IOException
+	 */
+	private long getVersionItem(String agency, String id) throws IOException {
+		long version = 0;
+		String httpsURL = basePath + "/api/v1/item/" + agency + "/" + id + "/versions/_latest?api_key=" + apiKey;
+		URL myUrl = new URL(httpsURL);
+		java.io.InputStream is;
+		if (myUrl.toString().contains("https")) {
+			HttpsURLConnection conn = (HttpsURLConnection) myUrl.openConnection();
+			is = conn.getInputStream();
+		} else {
+			HttpURLConnection conn = (HttpURLConnection) myUrl.openConnection();
+			is = conn.getInputStream();
+		}
+
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+
+		String inputLine;
+
+		while ((inputLine = br.readLine()) != null) {
+			System.out.println(inputLine);
+			version = Long.valueOf(inputLine);
+		}
+		br.close();
+		return version;
 
 	}
 
